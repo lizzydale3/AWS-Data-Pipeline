@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww20480\viewh12340\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 -- Query 1: Initial Table Preview\
+-- This query retrieves the first 10 rows from the dataset to verify data integrity and structure.\
+SELECT * FROM "iris-database".iris_data_bucket333 LIMIT 10;\
+\
+-- Query 2: Descriptive Statistics\
+-- This query calculates the average and standard deviation of the sepal and petal measurements, grouped by species, to understand central tendencies and variability.\
+SELECT species,\
+       avg(sepal_length) AS avg_sepal_length,\
+       avg(sepal_width) AS avg_sepal_width,\
+       avg(petal_length) AS avg_petal_length,\
+       avg(petal_width) AS avg_petal_width,\
+       stddev(sepal_length) AS stddev_sepal_length,\
+       stddev(sepal_width) AS stddev_sepal_width,\
+       stddev(petal_length) AS stddev_petal_length,\
+       stddev(petal_width) AS stddev_petal_width\
+FROM "iris-database".iris_data_bucket333\
+GROUP BY species;\
+\
+-- Query 3: Correlation Coefficients\
+-- This query calculates Pearson correlation coefficients between various pairs of features to assess their relationships.\
+SELECT corr(petal_length, petal_width) AS petal_corr,\
+       corr(petal_length, sepal_length) AS petal_sepal_length_corr,\
+       corr(petal_length, sepal_width) AS petal_sepal_width_corr,\
+       corr(sepal_length, sepal_width) AS sepal_corr\
+FROM "iris-database".iris_data_bucket333;\
+\
+-- Query 4: Multi-Dimensional Aggregations\
+-- This query provides a comprehensive statistical summary of petal lengths, including count, minimum, maximum, average, and standard deviation, grouped by species.\
+SELECT species,\
+       count(*) AS count,\
+       min(petal_length) AS min_petal_length,\
+       max(petal_length) AS max_petal_length,\
+       avg(petal_length) AS avg_petal_length,\
+       stddev(petal_length) AS stddev_petal_length\
+FROM "iris-database".iris_data_bucket333\
+GROUP BY species;\
+\
+-- Additional Queries\
+\
+-- Query 5: Petal and Sepal Length Analysis\
+-- This query investigates the average and standard deviation of petal and sepal lengths across species.\
+SELECT species,\
+       avg(petal_length) AS avg_petal_length,\
+       avg(sepal_length) AS avg_sepal_length,\
+       stddev(petal_length) AS stddev_petal_length,\
+       stddev(sepal_length) AS stddev_sepal_length\
+FROM "iris-database".iris_data_bucket333\
+GROUP BY species;\
+\
+-- Query 6: Feature Range and Distribution\
+-- This query calculates the range of each feature for each species, providing insights into the distribution.\
+SELECT species,\
+       min(sepal_length) AS min_sepal_length,\
+       max(sepal_length) AS max_sepal_length,\
+       min(sepal_width) AS min_sepal_width,\
+       max(sepal_width) AS max_sepal_width,\
+       min(petal_length) AS min_petal_length,\
+       max(petal_length) AS max_petal_length,\
+       min(petal_width) AS min_petal_width,\
+       max(petal_width) AS max_petal_width\
+FROM "iris-database".iris_data_bucket333\
+GROUP BY species;\
+\
+-- Query 7: Overall Feature Averages\
+-- This query provides overall averages for all features across the entire dataset, without grouping by species.\
+SELECT \
+       avg(sepal_length) AS overall_avg_sepal_length,\
+       avg(sepal_width) AS overall_avg_sepal_width,\
+       avg(petal_length) AS overall_avg_petal_length,\
+       avg(petal_width) AS overall_avg_petal_width\
+FROM "iris-database".iris_data_bucket333;\
+}
